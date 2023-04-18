@@ -66,7 +66,7 @@ scp [ -r -p] ${file/folder} ${whoami}@${ip}:${指定路径}
 
    > 可能出现问题（自带的openssh-client的openssh-client与所要安装的openssh-server所依赖的版本不同，所以要安装对应的版本，来覆盖掉ubuntu自带的openssh-client）
 
-![image-20230415014752156](D:\notes\img\image-20230415014752156.png)
+![image-20230415014752156](img\image-20230415014752156.png)
 
 3. 指定版本openssh-client
    ```shell
@@ -83,7 +83,7 @@ scp [ -r -p] ${file/folder} ${whoami}@${ip}:${指定路径}
    
    
 
-![image-20230415020148045](D:\notes\img\image-20230415020148045.png)
+![image-20230415020148045](img\image-20230415020148045.png)
 
 6. 验证是否运行
 
@@ -91,7 +91,7 @@ scp [ -r -p] ${file/folder} ${whoami}@${ip}:${指定路径}
    ps -e |grep ssh
    ```
 
-   ![image-20230415020429436](D:\notes\img\image-20230415020429436.png)
+   ![image-20230415020429436](img\image-20230415020429436.png)
 
 ---
 
@@ -358,7 +358,7 @@ git config --global user.email "1969414176@qq.com"
 
 > Git基本理论（核心）
 
-<img src="D:\notes\img\image-20230417005527739.png" alt="image-20230417005527739" style="zoom: 67%;" />
+<img src="img\image-20230417005527739.png" alt="image-20230417005527739" style="zoom: 67%;" />
 
 - Workspace：开发者工作区
 
