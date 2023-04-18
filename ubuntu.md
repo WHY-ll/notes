@@ -1,4 +1,8 @@
-# ubuntu
+# Ubuntu
+
+
+
+[TOC]
 
 ## 一、基础安装
 
@@ -47,6 +51,8 @@ sudo ufw enable	#开启
 
 ```shell
 scp [ -r -p] ${file/folder} ${whoami}@${ip}:${指定路径}
+
+scp ${whoami}@${ip}:${file/folder} ${指定路径}
 ```
 
 ---
@@ -75,13 +81,18 @@ scp [ -r -p] ${file/folder} ${whoami}@${ip}:${指定路径}
 
 4. 然后再安装openssh-server
 
-5. 验证是否安装
+5. 、开启openssh服务`可忽略（默认自启）`
+
+   ```bash
+   sudo /etc/init.d/ssh start
+   ```
+
+6. 验证是否安装
    ```shell
    dpkg -l |grep ssh
    ssh localhost
    ```
-   
-   
+
 
 ![image-20230415020148045](img\image-20230415020148045.png)
 
@@ -92,6 +103,22 @@ scp [ -r -p] ${file/folder} ${whoami}@${ip}:${指定路径}
    ```
 
    ![image-20230415020429436](img\image-20230415020429436.png)
+   
+   `补充：`
+   
+   远程ssh 格式 
+   
+   ```bash
+   ssh username@192.168.1.112
+   #改别名，不用每次都输ip
+   sudo vim ~/.bashrc
+   #写入
+   alias '${别名}'="ssh username@xx.11.232.xx"
+   #使生效
+   source ~/.bashrc
+   ```
+   
+   
 
 ---
 
