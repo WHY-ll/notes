@@ -4,31 +4,31 @@
 
 [TOC]
 
-## 一、基础安装
+## 1、基础安装
 
-### 常用命令
+### 1.1 常用命令
 
 **查看ip**
 
-```shell
+```bash
 ip addr
 ```
 
 **查看主机名**
 
-````shell
+````bash
 hostname
 ````
 
 **查找本机用户名**
 
-```shell
+```bash
 whoami
 ```
 
 **查看隐藏目录**
 
-```bas
+```bash
 ls -ah
 ```
 
@@ -36,7 +36,7 @@ ls -ah
 
 **防火墙**
 
-```shell
+```bash
 sudo ufw enable	#开启
 		 disable	#关闭
 		 status	#状态
@@ -49,7 +49,7 @@ sudo ufw enable	#开启
 
 **SSH协议远程拷贝**
 
-```shell
+```bash
 scp [ -r -p] ${file/folder} ${whoami}@${ip}:${指定路径}
 
 scp ${whoami}@${ip}:${file/folder} ${指定路径}
@@ -57,39 +57,39 @@ scp ${whoami}@${ip}:${file/folder} ${指定路径}
 
 ---
 
-### SSH服务
+### 1.2 SSH服务
 
 1. 安装所需包、更新Ubuntu系统
 
-   ```shell
+   ```bash
    sudo apt update && sudo apt upgrade
    ```
 
 2. openssh-server组件
-   ```shell
+   ```bash
    sudo apt install openssh-server
    ```
 
-   > 可能出现问题（自带的openssh-client的openssh-client与所要安装的openssh-server所依赖的版本不同，所以要安装对应的版本，来覆盖掉ubuntu自带的openssh-client）
-
-![image-20230415014752156](img\image-20230415014752156.png)
-
-3. 指定版本openssh-client
-   ```shell
-   sudo apt install openssh-client=1:8.2p1-4ubuntu0.2
+   > **注意**：可能出现问题（自带的openssh-client的openssh-client与所要安装的openssh-server所依赖的版本不同，安装指定提示的版本openssh-client）
+   
+   ```bash
+   sudo apt install openssh-client=[版本号]
    ```
 
-4. 然后再安装openssh-server
+​		**重新执行   sudo apt install openssh-server**
 
-5. 、开启openssh服务`可忽略（默认自启）`
+3. 、开启openssh服务 `<可忽略（默认自启）>`
 
    ```bash
    sudo /etc/init.d/ssh start
    ```
 
-6. 验证是否安装
-   ```shell
+4. 验证是否安装`<两种方式有输出代表成功>`
+   ```bash
    dpkg -l |grep ssh
+   ```
+
+   ```bash
    ssh localhost
    ```
 
@@ -98,7 +98,7 @@ scp ${whoami}@${ip}:${file/folder} ${指定路径}
 
 6. 验证是否运行
 
-   ```shell
+   ```bash
    ps -e |grep ssh
    ```
 
@@ -122,17 +122,17 @@ scp ${whoami}@${ip}:${file/folder} ${指定路径}
 
 ---
 
-### sogou输入法
+### 1.3 software
 
 1. 更新源
 
-   ```shell
+   ```bash
    sudo apt update
    ```
 
 2. 安装 fcitx 输入法框架
 
-   ```shell
+   ```bash
    sudo apt install fcitx
    ```
 
@@ -142,36 +142,30 @@ scp ${whoami}@${ip}:${file/folder} ${指定路径}
 
 4. 设置 开机自启动
 
-   ```shell
+   ```bash
    sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
    ```
 
 5. 卸载 ibus 输入法框架
 
-   ```shell
+   ```bash
    sudo apt purge ibus
    ```
 
 6. 安装 搜狗
 
-   ```shell
+   ```bash
    sudo dpkg -i sogoupinyin_4.0.1.2800_x86_64.deb
    ```
 
 7. ==安装 输入法依赖==
 
-   ```shell
+   ```bash
    sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
    sudo apt install libgsettings-qt1
    ```
 
-> 重启 reboot
-
----
-
-### wps/compare/code/google
-
-```shell
+```bash
 sudo dpkg -i  bcompare-4.4.2.26348_amd64.deb
 sudo dpkg -i  code_1.69.2-1658162013_amd64.deb
 sudo dpkg -i  google-chrome-stable_current_amd64.deb
@@ -182,18 +176,18 @@ sudo dpkg -i  wps-office_11.1.0.11691_amd64.deb
 
 ---
 
-### zsh
+### 1.4 zsh
 
 1. 检查系统所有的shell
 
-   ```shell
+   ```bash
    cat /etc/shells   
    cat $SHELL #查看当前使用的shell
    ```
 
 2. 安装zsh
 
-   ```shell
+   ```bash
    sudo apt install zsh #安装zsh
    chsh -s /bin/zsh #将zsh设置成默认shell（注：不要加sudo）
    ```
@@ -204,7 +198,7 @@ sudo dpkg -i  wps-office_11.1.0.11691_amd64.deb
 
    `如果没有装curl请 ：sudo apt install curl`
 
-   ```shell
+   ```bash
    wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh 
    sh -c "$(curl -fsSL https://gitee.com/shmhlsy/oh-my-zsh-install.sh/raw/master/install.sh)" #国内镜像源
    echo ${ZSH_CUSTOM}	#查看路径
@@ -212,7 +206,7 @@ sudo dpkg -i  wps-office_11.1.0.11691_amd64.deb
 
 4. 安装插件
 
-   ```shell
+   ```bash
    #zsh-autosuggestions 命令行命令键入时的历史命令建议
    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
    #zsh-syntax-highlighting 命令行语法高亮插件
@@ -221,22 +215,22 @@ sudo dpkg -i  wps-office_11.1.0.11691_amd64.deb
 
 5. 配置
 
-   ```shell
+   ```bash
    sudo gedit ~/.zshrc
    ```
 
    `写入`
 
-   ```shell
+   ```bash
    #防止中文乱码
    export LC_ALL=en_US.UTF-8
    export LANG=en_US.UTF-8
-   # 设置字体模式以及配置命令行的主题
+   #设置字体模式以及配置命令行的主题
    POWERLEVEL9K_MODE='nerdfont-complete'
    ZSH_THEME="agnoster"
-   # 启动错误命令自动更正
+   #启动错误命令自动更正
    ENABLE_CORRECTION="true"
-   # 在命令执行的过程中，使用小红点进行提示
+   #在命令执行的过程中，使用小红点进行提示
    COMPLETION_WAITING_DOTS="true"
    plugins=(
            git
@@ -249,49 +243,27 @@ sudo dpkg -i  wps-office_11.1.0.11691_amd64.deb
 
    ---
 
-## 二、java开发环境
+## 2、开发环境
 
-### navicat
-
-[网盘提取](链接：https://pan.baidu.com/s/1JjXrpXWsxV5TlrDzZCivpw?pwd=n5x9 
-提取码：n5x9 )
-
-> 下载文件，==断网操作==
->
-> 执行navicat-keygen-tools/bin内的navicat-keygen以及之前生成的私钥
-
-```shell
-./navicat-keygen-tools/bin/navicat-keygen --text RegPrivateKey.pem
-```
-
-```tex
-依次输入：	1	1	15
-		-- 会生成一串许可证秘钥随后的姓名和组织随便填
-		-- 复制秘钥到软件界面注册->手动激活
-		-- 复制请求码，到命令行，按两次回车
-		-- 复制生成的激活码
-		-- 切换回软件 将激活码粘贴到框内点击ok，提示激活成功
-```
-
-### jdk
+### 2.1 jdk
 
 [免登录下载](http://www.codebaoku.com/jdk/jdk-oracle-jdk11.html)
 
 1. 安装
 
-   ```shell
+   ```bash
    sudo dpkg -i jdk-11.0.17_linux-x64_bin.deb
    ```
 
 2. 配置环境
 
-   ```shell
+   ```bash
    sudo vim ~/.zshrc	#使用zsh
    ```
 
    `在末尾添加`
 
-   ```shell
+   ```bash
    export JAVA_HOME=/usr/lib/jvm/jdk-11
    export JRE_HOME=${JAVA_HOME}/jre
    export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
@@ -300,21 +272,21 @@ sudo dpkg -i  wps-office_11.1.0.11691_amd64.deb
 
 3. 配置生效
 
-   ```shell
+   ```bash
    source ~/.zshrc
    ```
 
 4. 运行查看
 
-   ```shell
+   ```bash
    java -version
    ```
 
-### maven
+### 2.2 maven
 
 [下载地址](https://archive.apache.org/dist/maven/maven-3/)`注：binaries版`
 
-```shell
+```bash
 sudo tar -zxvf apache-maven-3.8.8-bin.tar.gz -C /usr/local/src/maven/
 sudo vim ~/.zshrc
 #写入如下内容
@@ -344,15 +316,31 @@ sudo cp /usr/local/src/maven/apache-maven-3.8.8/config/settings.xml ~/.m2
 
 ```
 
----
+### 2.3 navicat
 
-## 三、开发工具
+[网盘提取](链接：https://pan.baidu.com/s/1JjXrpXWsxV5TlrDzZCivpw?pwd=n5x9 
+提取码：n5x9 )
 
-### idea
+> 下载文件，==断网操作==
+>
+> 执行navicat-keygen-tools/bin内的navicat-keygen以及之前生成的私钥
 
-## 四、版本控制工具
+```bash
+./navicat-keygen-tools/bin/navicat-keygen --text RegPrivateKey.pem
+```
 
-### Git
+```tex
+依次输入：	1	1	15
+		-- 会生成一串许可证秘钥随后的姓名和组织随便填
+		-- 复制秘钥到软件界面注册->手动激活
+		-- 复制请求码，到命令行，按两次回车
+		-- 复制生成的激活码
+		-- 切换回软件 将激活码粘贴到框内点击ok，提示激活成功
+```
+
+## 4、版本控制工具
+
+### 4.1 Git
 
 ```tex
 SVN是集中式版本控制，版本库是集中在中央服务器的
@@ -427,7 +415,7 @@ git reflog			#当前版本库的提交历史
 
 ```
 
-> git分支 ==git branch、git checkout==
+> git分支 	==git branch、git checkout==
 
 ```bash
 git branch			#查看HEAD的指向
@@ -443,9 +431,7 @@ git checkout -- file		#文件撤销回到最近一次修改的状态
 git merge 分支			#合并
 ```
 
-
-
-> 回滚代码仓库 ==git reset [恢复等级] [回滚id/tag别名]==
+> 回滚代码仓库 	==git reset [恢复等级] [回滚id/tag别名]==
 
 ```bash
 git reset --soft		#头指针恢复，已经add的暂存区以及工作空间的所有东西都不变
@@ -455,8 +441,6 @@ git reset --hard HEAD^		#迭代我们仓库的上一个版本
                  HEAD~3		#回滚master前三个版本
 git reset 回滚id filename
 ```
-
-
 
 > 远程交互
 
@@ -474,7 +458,210 @@ git remote rename origin		#修改
 ssh-keygen -t rsa -C'url'		#三次回车
 ```
 
-### GitLab
-
 运行在linux中，[下载官网](https://packages.gitlab.com/gitlab/)
 
+## 5、Shell
+
+### 5.1 变量
+
+**5.1.1 系统预定义变量**
+
+```bash
+$HOME	$PWD	$SHELL	$USER	#常用变量
+```
+
+```bash
+env				
+env | less
+printenv | less		#查看所有系统全局变量
+
+printenv USER		#打印某个变量 printenv 替换 $
+echo $USER			#使用某个变量
+
+set				#显示当前Shell中所有变量
+set | less
+```
+
+**5.1.2 自定义变量**
+
+**基本语法**
+
+​		变量名=变量值，注意：=前后不能有空格
+
+​		撤销变量：unset	变量名
+
+ 		声明静态变量：redonly变量，注意：不能unset
+
+```bash
+export 变量名		#可把变量提升为全局变量
+```
+
+**5.1.3 特殊变量**
+
+**$n**
+
+n  为数字，$0 脚本名称，$0-9 一到九个参数，十以上用大括号包含，如 ${10}`
+
+**$#**
+
+获取所有==输入参数个数==，常用于循环，判断参数的个数是否正确，以及加强脚本的健壮性
+
+**$***
+
+代表命令行中所有的参数，==把所有的参数看成一个整体==
+
+**$@**
+
+代表命令行中所有的参数，==把每个参数区别对待==
+
+**$?**
+
+最后一次执行命令的返回状态，如果值为0，证明上一个命令正确执行，如果非0，证明执行不正确
+
+### 5.2 运算符
+
+**基本语法** （###普通写法：`expr 1 + 2`，定义变量：s=`expr 5 \* 2`）
+
+​		"$((运算式))" 或 "$[运算式]"
+
+​		例如：`s=$[(2+3)*4]`	#常用 []
+
+### 5.3 条件判断
+
+**1）基本语法**
+
+test [ condition ]		==注：前后有空格==
+
+如：test $a = hello	echo $?
+
+**2）常用判断条件**
+
+**（1）整数比较**
+
+-eq	等于queal	-ne	不等于not equal	
+
+-lt	小于less than	-le	小于等于less equal	
+
+-gt	大于greater than	-ge	大于等于greater equal		如：`[ 1 -ge 2 ]`
+
+**（2）按文件权限判断**
+
+-r 有read的权限	-w 有write的权限	-x 有execute的权限		如：`[ -w 文件 ]`
+
+**（3）按文件类型进行判断**
+
+-e	文件存在（existence）		如：`[ -e xx/xx/文件 ]`
+
+-f	文件存在并且是一个常规的文件（file）
+
+-d	文件存在并且是一个目录（directory）
+
+**（4）多条件判断**
+
+&& 或 -a	前一条执行成功，才执行后一条
+
+|| 或 -o	前一天执行失败，才执行后一条		如：`[ aaa ] && echo OK || echo notOK`
+
+### 5.4 流程控制
+
+**5.4.1 if 判断**
+
+**基本语法**
+
+（1）单分支
+
+```bash
+if [ 条件判断式 ] ; then
+	程序
+fi
+#或者
+if [ 条件判断式 ]
+then
+	程序
+fi
+```
+
+（2）多分支
+
+```bash
+if [ 条件判断式 ]
+then
+	程序
+elif [ 条件判断式 ]
+then
+	程序
+else
+	程序
+fi
+```
+
+**5.4.2 case 语句**
+
+**基本语法**
+
+```bash
+case $变量名 in			#行尾必须 in
+"值1")						#每一个模式匹配必须以右括号")"结束
+	变量等于值1，执行程序1
+;;							#";;"表示命令序列结束，相当于java中的break
+"值2")
+	变量等于值2，执行程序2
+;;
+	...			#省略其他分支
+*)							#"*)"代表默认模式，相当于java中的default
+	以上都不满足，执行此程序
+;;
+esac
+```
+
+**5.4.3 for 循环**
+
+**基本语法**
+
+```bash
+for (( 初始值;循环控制条件;变量变化 ))		#如：for((i=0;i<=100;i++))
+do
+	程序										#sum=$[$sum+$i]			
+done
+echo $sum			#输出
+#或
+for 变量名 in 值1 值2 值3; do echo $变量名; done
+#获
+for i in {1...100}; do sum=$[$sum+$i]; done; echo $sum
+```
+
+**5.4.3 while 循环**
+
+```bash
+a=1
+while [ $a -le $1 ]
+do
+#	sum2=$[ $sum2 + $a ]
+#	a=$[$a + 1]
+	let sum2 += a
+	let a++
+done
+echo $sum2
+```
+
+### 5.5 read 读取控制台输入
+
+**基本语法**
+
+read (选项) (参数)
+
+1）选项
+
+​		-p：指定读取值时的提示符
+
+​		-t：指定读取值时等待的时间（秒）-t不加表示一直等待
+
+2）参数
+
+​		变量：指定读取值的变量
+
+如：`read -t 10 -p "请输入xx：" name`
+
+​		`echo "welcome，$name"`
+
+### 5.5 函数
