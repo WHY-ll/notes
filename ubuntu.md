@@ -318,7 +318,7 @@ sudo cp /usr/local/src/maven/apache-maven-3.8.8/config/settings.xml ~/.m2
 
 ### 2.3 navicat
 
-[网盘提取](链接：https://pan.baidu.com/s/1yeufENjGLQRInN2o3J013A?pwd=toif )
+[网盘提取](https://pan.baidu.com/s/1yeufENjGLQRInN2o3J013A?pwd=toif )
 
 给navicat15.AppImage附执行权限，之后可以直接双击执行
 
