@@ -318,8 +318,13 @@ sudo cp /usr/local/src/maven/apache-maven-3.8.8/config/settings.xml ~/.m2
 
 ### 2.3 navicat
 
-[网盘提取](链接：https://pan.baidu.com/s/1JjXrpXWsxV5TlrDzZCivpw?pwd=n5x9 
-提取码：n5x9 )
+[网盘提取](链接：https://pan.baidu.com/s/1yeufENjGLQRInN2o3J013A?pwd=toif )
+
+给navicat15.AppImage附执行权限，之后可以直接双击执行
+
+```bash
+sudo chmod +x navicat15.AppImage
+```
 
 > 下载文件，==断网操作==
 >
@@ -337,6 +342,8 @@ sudo cp /usr/local/src/maven/apache-maven-3.8.8/config/settings.xml ~/.m2
 		-- 复制生成的激活码
 		-- 切换回软件 将激活码粘贴到框内点击ok，提示激活成功
 ```
+
+---
 
 ## 4、版本控制工具
 
@@ -383,7 +390,7 @@ git config --global user.email "1969414176@qq.com"
 
 - Remote：远程仓库
 
-> 查看文件状态
+> git status	查看文件状态
 
 - Untracked：未提交
 
@@ -394,44 +401,60 @@ git config --global user.email "1969414176@qq.com"
 - Staged：暂存状态
 
 ```bash
-#查看指定文件状态
-git status [filename]
-#查看所有文件状态
-git status
-
-git add --all			#添加所有文件到暂存区
-		.				#不会记录删除操作
-git commit -m "信息内容"	#提交暂存区内容到本地仓库 -m 提交信息
-git commit --amend		#重写上一次的提交信息
-
-git log					#查看日志
-git log --pretty=oneline	#简洁输出
-git log [filename]		#查看该文件有多少个版本可以回滚
-
-git tag 别名 版本号		#设置版本标签
-git tag -d 别名			#删除标签
-
-git reflog			#当前版本库的提交历史
-
+git status [filename]		#查看指定文件状态
+git status				#查看所有文件状态
 ```
 
-> git分支 	==git branch、git checkout==
+> git add	#添加暂存区	commit	#提交本地仓库
 
 ```bash
-git branch			#查看HEAD的指向
-git branch 分支名			#新建分支
-git branch -a/-v			#查看所有分支
-git brabch -d/-D 分支				#删除分支
+git add --all				#添加所有文件到暂存区
+		.					#不会记录删除操作
+git commit -m "信息内容"	 #提交暂存区内容到本地仓库 -m 提交信息
+git commit --amend			#重写上一次的提交信息
+```
+
+> git log	查看历史版本
+
+```bash
+git log						#查看日志
+git log --pretty=oneline	#简洁输出
+git log [filename]			#查看该文件有多少个版本可以回滚
+git reflog					#当前版本库的提交历史
+```
+
+> git tag	设置版本标签
+
+```bash
+git tag 别名 版本号			#设置版本标签
+git tag -d 别名			#删除标签
+```
+
+
+
+> git  [分支]
+
+branch 创建分支	checkout 切换分支	push 删除	merge 合并	fetch 拉去远程所有分支	
+
+```bash
+git branch					#查看HEAD的指向(当前所属分支)
+git branch 分支名				#新建分支
+git branch -a/-v					#查看当前所有分支
+git branch -m 分支名 新的分支名			#修改分支名称
+git brabch -d/-D 分支名				#删除分支
 git push origin --delete 远程分支名		#删除远程分支
 
-git checkout 分支			#切换分支
-git checkout -b 分支		#创建并切换分支
+git checkout 分支				#切换分支
+git checkout -b 分支			#创建并切换分支
 git checkout -- file		#文件撤销回到最近一次修改的状态
 
 git merge 分支			#合并
+              --allow-unrelated-histories	#强制合并分支
+git fetch
+		  xxx	#拉去指定的最新内容
 ```
 
-> 回滚代码仓库 	==git reset [恢复等级] [回滚id/tag别名]==
+> git reset	回滚代码仓库 	==git reset [恢复等级] [回滚id/tag别名]==
 
 ```bash
 git reset --soft		#头指针恢复，已经add的暂存区以及工作空间的所有东西都不变
@@ -442,12 +465,14 @@ git reset --hard HEAD^		#迭代我们仓库的上一个版本
 git reset 回滚id filename
 ```
 
-> 远程交互
+> git remote	远程交互
 
 打开.git/config  找到[remote "origin"] url = "https/ssh"，可以手动操作
 
 ```bash
+git remote show origin			#查看远程仓库信息
 git remote add origin url		#添加remote
+git remote prune origin			#刷新本地分支仓库
 git remote remove origin		#删除
 git remote rename origin		#修改
 ```
@@ -455,10 +480,39 @@ git remote rename origin		#修改
 `如果是 ssh的url，需要生成.ssh的安全认证的公钥`
 
 ```bash
-ssh-keygen -t rsa -C'url'		#三次回车
+ssh-keygen -t rsa -C'email@email.com'		#三次回车
+ssh -T git@github.com						#测试是否配置成功
 ```
 
-运行在linux中，[下载官网](https://packages.gitlab.com/gitlab/)
+>git clone	克隆，不需要git init，clone自动初始化
+
+```bash
+git clone url
+          -b url		#指定分支
+```
+
+> git stash	保存当前工作切换分支（以栈的方式保存，先进后出）
+
+```bash
+git stash			#保存当前工作状态
+          list		#查看当前储存多少个工作状态
+          pop		#将状态恢复
+          drop list名称		#移除指定list
+          clear		#一处所有list
+          show		#查看最新保存的stash和当前目录的差异
+```
+
+> git pull	拉去
+
+> git push	推送到远程仓库
+
+```bash
+git push -u origin 分支名			#推送远程分支
+```
+
+
+
+---
 
 ## 5、Shell
 
